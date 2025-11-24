@@ -3,49 +3,37 @@
 [ext_resource type="Script" uid="uid://ca2fj0tcl1prk" path="res://Scripts/hud.gd" id="1_e0onf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0onf"]
-bg_color = Color(0, 0, 0, 0.49803922)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fccik"]
-bg_color = Color(0, 0.5647059, 0, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" groups=["hud"]]
 script = ExtResource("1_e0onf")
 
-[node name="HealthBarContainer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 54.0
-offset_top = 27.0
-offset_right = 94.0
-offset_bottom = 67.0
-
-[node name="ProgressBar" type="ProgressBar" parent="HealthBarContainer"]
-layout_mode = 0
-offset_right = 214.0
-offset_bottom = 27.0
+[node name="HealthBar" type="ProgressBar" parent="." groups=["hud"]]
+anchors_preset = -1
+anchor_left = 0.0010775862
+anchor_top = 0.030264817
+anchor_right = 0.26400855
+anchor_bottom = 0.0630517
+offset_left = 63.0
+offset_top = -9.0
+offset_right = 63.00006
+offset_bottom = -9.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme_override_styles/background = SubResource("StyleBoxFlat_e0onf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fccik")
 value = 100.0
 show_percentage = false
-
-[node name="Label" type="Label" parent="HealthBarContainer/ProgressBar"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -11.5
-offset_right = 0.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+metadata/_edit_use_anchors_ = true
