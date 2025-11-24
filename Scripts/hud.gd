@@ -4,6 +4,10 @@ extends CanvasLayer
 
 var displayed_value := 0.0
 
+func _ready() -> void:
+	reset_color()
+
+
 func update_health(current: int, max_health: int) -> void:
 	if hp_bar == null:
 		return
@@ -48,7 +52,10 @@ func flash_damage() -> void:
 	tween.tween_property(hp_bar, "modulate", Color.WHITE, 0.3)\
 	.set_trans(Tween.TRANS_SINE)\
 	.set_ease(tween.EASE_OUT)
-	
+
+func reset_color():
+	var fill_style: StyleBoxFlat = hp_bar.get_theme_stylebox("fill")
+	fill_style.bg_color = Color(0,1,0) 
 	
 	
 	
