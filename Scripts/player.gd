@@ -80,7 +80,7 @@ func set_state(new_state: State):
 			anim.play("jump_fall")
 
 		State.ATTACK:
-			anim.play("attack")
+			anim.play("attack_1")
 			attack_timer = 0.0
 			is_cancelable_attack = true
 
@@ -202,6 +202,7 @@ func apply_gravity(delta):
 		velocity.y = 0
 
 
+
 # Sistema de vida
 func take_damage(amount):
 	if state == State.HURT or state == State.DEATH:
@@ -226,7 +227,7 @@ func take_damage(amount):
 # Animação finalizada
 func _on_animated_sprite_2d_animation_finished():
 	match anim.animation:
-		"attack":
+		"attack_1":
 			set_state(State.IDLE)
 		"hurt":
 			set_state(State.IDLE)
