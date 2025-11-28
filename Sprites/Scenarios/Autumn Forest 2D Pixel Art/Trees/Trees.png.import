@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnx44v1cuknc1"
-path="res://.godot/imported/Layer_0004_Lights.png-295a233a3e9dec4f14119bee1d0b6ee6.ctex"
+uid="uid://bcvq8hrufp7i6"
+path="res://.godot/imported/Trees.png-25bb8058488c9a611ed06847cb2f4923.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Scenarios/Layer_0004_Lights.png"
-dest_files=["res://.godot/imported/Layer_0004_Lights.png-295a233a3e9dec4f14119bee1d0b6ee6.ctex"]
+source_file="res://Sprites/Scenarios/Autumn Forest 2D Pixel Art/Trees/Trees.png"
+dest_files=["res://.godot/imported/Trees.png-25bb8058488c9a611ed06847cb2f4923.ctex"]
 
 [params]
 

@@ -12,6 +12,19 @@ extends CharacterBody2D
 @export var max_health: int = 100
 var health: int = max_health
 
+# DASH
+@export var dash_speed := 450.0
+@export var dash_time := 0.18
+@export var dash_iframes := 0.18
+@export var double_tap_time := 0.25
+
+var dash_timer := 0.0
+var is_invincible := false
+
+var last_tap_direction := 0
+var last_tap_time := 0.0
+
+
 var hud: CanvasLayer
 
 # FSM
@@ -23,6 +36,7 @@ enum State {
 	JUMP_TRANSITION,
 	JUMP_FALL,
 	ATTACK,
+	DASH,
 	BLOCK,
 	HURT,
 	DEATH
@@ -83,6 +97,10 @@ func set_state(new_state: State):
 			anim.play("attack_1")
 			attack_timer = 0.0
 			is_cancelable_attack = true
+			
+		State.DASH:
+			anim.play("dash")
+
 
 		State.BLOCK:
 			anim.play("block")
@@ -97,6 +115,32 @@ func set_state(new_state: State):
 
 # Atualiza o comportamento dependendo do estado
 func update_state(delta):
+	if state == State.HURT:
+		return
+	
+	# DEBUG DAMAGE – pressionando "k"
+	if Input.is_action_just_pressed("debug_damage"):
+		take_damage(10)
+
+	# Detectar double tap (direita)
+	if Input.is_action_just_pressed("right") and is_on_floor():
+		if last_tap_direction == 1 and last_tap_time > 0 and last_tap_time < double_tap_time:
+			_start_dash(1)
+		else:
+			last_tap_direction = 1
+			last_tap_time = 0.0
+
+	# Detectar double tap (esquerda)
+	if Input.is_action_just_pressed("left") and is_on_floor():
+		if last_tap_direction == -1 and last_tap_time > 0 and last_tap_time < double_tap_time:
+			_start_dash(-1)
+		else:
+			last_tap_direction = -1
+			last_tap_time = 0.0
+
+	# Contador do tempo entre taps
+	last_tap_time += delta
+
 
 	match state:
 
@@ -163,6 +207,23 @@ func update_state(delta):
 				return
 
 
+		State.DASH:
+			velocity.y = 0  # sem gravidade
+			dash_timer -= delta
+
+			if dash_timer <= 0:
+				is_invincible = false
+
+			# Volta para IDLE ou RUN dependendo do input
+			var dir = Input.get_axis("left", "right")
+			if dir != 0:
+				set_state(State.RUN)
+			else:
+				set_state(State.IDLE)
+
+				return
+
+
 		State.JUMP_START:
 			if velocity.y < 0:
 				set_state(State.JUMP)
@@ -187,6 +248,7 @@ func update_state(delta):
 
 
 		State.HURT:
+			velocity.x = 0
 			pass
 
 
@@ -205,6 +267,9 @@ func apply_gravity(delta):
 
 # Sistema de vida
 func take_damage(amount):
+	if is_invincible:
+		return
+
 	if state == State.HURT or state == State.DEATH:
 		return
 
@@ -224,6 +289,7 @@ func take_damage(amount):
 	set_state(State.HURT)
 
 
+
 # Animação finalizada
 func _on_animated_sprite_2d_animation_finished():
 	match anim.animation:
@@ -231,3 +297,15 @@ func _on_animated_sprite_2d_animation_finished():
 			set_state(State.IDLE)
 		"hurt":
 			set_state(State.IDLE)
+			
+func _start_dash(dir: int):
+	# impedir dash durante ataque, hurt ou morte
+	if state == State.ATTACK or state == State.HURT or state == State.DEATH:
+		return
+
+	velocity.x = dir * dash_speed
+	velocity.y = 0
+	dash_timer = dash_time
+
+	is_invincible = true
+	set_state(State.DASH)
