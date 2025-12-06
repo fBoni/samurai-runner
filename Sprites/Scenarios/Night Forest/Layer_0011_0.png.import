@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwi404qq2jnh3"
-path="res://.godot/imported/Layer_0011_0.png-6dfcea6782f7054bfbbaa7fdb7096387.ctex"
+path="res://.godot/imported/Layer_0011_0.png-77058300f3608b2069a5c9c4bc82d011.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Scenarios/Layer_0011_0.png"
-dest_files=["res://.godot/imported/Layer_0011_0.png-6dfcea6782f7054bfbbaa7fdb7096387.ctex"]
+source_file="res://Sprites/Scenarios/Night Forest/Layer_0011_0.png"
+dest_files=["res://.godot/imported/Layer_0011_0.png-77058300f3608b2069a5c9c4bc82d011.ctex"]
 
 [params]
 

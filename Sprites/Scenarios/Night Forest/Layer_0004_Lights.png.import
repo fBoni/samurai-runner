@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqlwtm072j1qu"
-path="res://.godot/imported/Layer_0010_1.png-a98a0fd22bdee7603eef4727e12b2e49.ctex"
+uid="uid://bnx44v1cuknc1"
+path="res://.godot/imported/Layer_0004_Lights.png-e741791a22ee2ec219e1c038482aeac4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Scenarios/Layer_0010_1.png"
-dest_files=["res://.godot/imported/Layer_0010_1.png-a98a0fd22bdee7603eef4727e12b2e49.ctex"]
+source_file="res://Sprites/Scenarios/Night Forest/Layer_0004_Lights.png"
+dest_files=["res://.godot/imported/Layer_0004_Lights.png-e741791a22ee2ec219e1c038482aeac4.ctex"]
 
 [params]
 
